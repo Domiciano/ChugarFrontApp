@@ -1,0 +1,55 @@
+﻿<div>
+    <div class="content">
+        <div class="gray-content">
+            <div class="header">
+                <h2>Reportes</h2>
+            </div>
+            <div class="body">
+                <div class="view">
+                    <h4>Selecciona el reporte que deseas visualizar.</h4>
+
+                    <div class="custom-form">
+
+                        <div class="fila">
+                            <div class="custom-input">
+                                <div class="custom-select">
+                                    <select id="indicador" onchange="cambiarGrafica()">
+                                        <option value="1">Control de HbA1c</option>
+                                        <option value="2">Control LDL</option>
+                                        <option value="3">Control TFG</option>
+                                        <option value="4">Control PTH Estadio 5</option>
+                                        <option value="5">Control PTH Estadio 4</option>
+                                        <option value="6">Control PTH Estadio 3</option>
+                                    </select>
+                                    <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p><h3 class="centered" id="titulo1" style="margin-top:40px"></h3></p>
+                        <div class="fila">                            
+                            <p><div id="myfirstchart" style="height: 350px;"></div></p>
+                        </div>
+
+                        <p><h3 class="centered" id="titulo2"></h3></p>
+                        <div class="fila">                            
+                            <p><div id="myfirstchart2" style="height: 350px;"></div></p>
+                        </div>
+
+                        <p><h3 class="centered" id="titulo3"></h3></p>
+                        <div class="fila">                            
+                            <div id="myfirstchart3" style="height: 350px;"></div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <link rel="stylesheet" type="text/css" href="~/css/morris.css">
+    <script type="text/javascript" src="~/js/morris.js"></script>
+    <script type="text/javascript" src="~/js/morris.min.js"></script>
+    <script type="text/javascript" src="~/js/raphael.js"></script>
+    <script type="text/javascript" src="~/js/reporte.js"></script>
+</div>

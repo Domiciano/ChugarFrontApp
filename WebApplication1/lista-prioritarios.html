@@ -1,0 +1,156 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <script src="https://www.gstatic.com/firebasejs/3.7.1/firebase.js"></script>
+    <script>
+		  // Initialize Firebase
+		  var config = {
+		    apiKey: "AIzaSyDnFJ-GDuPcCfAVv0ylTNu-mvu_1CVqw1k",
+		    authDomain: "diabetesicesi-123d7.firebaseapp.com",
+		    databaseURL: "https://diabetesicesi-123d7.firebaseio.com",
+		    storageBucket: "diabetesicesi-123d7.appspot.com",
+		    messagingSenderId: "557877522634"
+		  };
+		  firebase.initializeApp(config);
+    </script>
+    <script type="text/javascript" src="js/jquery-1.11.3.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/site.js"></script>
+
+
+    <meta charset="UTF-8">
+    <title>Chugar</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:300i,400,400i,500i,600i,700i,800i" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/site.css">
+</head>
+<body>
+
+    <div class="navigation"><a class="open-menu-btn" href="#" onclick="openSideMenu()">MENÚ</a><span>user name</span></div>
+
+    <div class="layout">
+        <div id="backdrop" class="bd-hide"></div>
+        <div id="side-menu">
+            <div class="logo">
+                <h1 class="title">chugar</h1>
+                <div class="subtitle">web</div>
+            </div>
+            <div class="user">
+                <div class="text">Bienvenido</div>
+                <div class="text uppercase" id="nombre_usuario">user name</div>
+            </div>
+            <div class="menu">
+                <a class="menu-link active" href="lista-archivos.html">Archivos</a>
+                <a class="menu-link" href="carga-de-archivos.html">Importar datos</a>
+                <a class="menu-link" href="gestion-de-usuarios.html">Gestión de usuarios</a>
+                <a class="menu-link" href="#">Gestión de roles</a>
+                <a class="menu-link" href="#">Reportes</a>
+                <a class="menu-link" href="#" id="btn_cerrar_sesion">Cerrar sesión</a>
+            </div>
+
+
+
+        </div>
+        <div class="content">
+            <div class="gray-content">
+                <div class="header">
+                    <span></span>
+                    <h2>Lista de prioritarios</h2>
+                </div>
+                <div class="body">
+                    <div class="view">
+                        <h4>A continuación se listan los pacientes prioritarios</h4>
+                        <div class="table-container">
+                            <table class="errors-table">
+                                <thead>
+                                    <tr>
+                                        <th>Nombres</th>
+                                        <th>Apellidos</th>
+                                        <th>Cédula</th>
+                                        <th>Número de contacto</th>
+                                        <th>Variables prioritarias</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody id="lista-prioritarios">
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="centered">
+                            <p class="blue-text">Para descargar los archivo, de click en el icono de la derecha</p>
+                            <a href="lista-archivos.html" class="custom-btn">Atrás</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+</body>
+</html>
+
+
+<script type="text/javascript">
+    $(document).ready(init);
+
+    var lastcolor;
+
+    function init() {
+        localStorage.removeItem('cedula');
+        var id_file = localStorage.getItem('file-id');
+
+        if (id_file !== null) {
+            $.ajax({
+                url: "/Data/getListaDePrioritarios",
+                type: "GET",
+                data: { "file_id": id_file }
+            }).done(function (respuesta) {
+                //respuesta = "[{\"Apellidos\":\"Fake\",\"Cedula\":\"46546513\",\"Id\":\"e54bef9f-8135-4463-a6c2-d62aca026213\",\"IdArchivo\":\"fc98a3b3-64fc-4743-8911-18e7d23c781b\",\"ListaVariablesPrioritarias\":[{\"Id\":\"e57d0a90-5d32-430a-9751-2dbd900d73d6\",\"NombreVariable\":\"COSITOMALO\",\"ValorUmbral\":\"109\",\"ValorVariable\":\"50\"},{\"Id\":\"c8a94cd5-4ece-45ba-930a-94e535e49357\",\"NombreVariable\":\"COSITOMALO\",\"ValorUmbral\":\"109\",\"ValorVariable\":\"50\"},{\"Id\":\"c2788f82-3892-425d-b16a-164283a694e2\",\"NombreVariable\":\"COSITOMALO\",\"ValorUmbral\":\"109\",\"ValorVariable\":\"50\"}],\"Nombres\":\"Jhon\",\"NumContacto\":\"123-fake-numb\"}]";
+                var prioritarios = JSON.parse(respuesta);
+
+                $("#lista-prioritarios").empty();
+
+                for (var i = 0 ; i < prioritarios.length ; i++) {
+                    var fila = "<tr class='filaselector' id='" + prioritarios[i].Cedula + "'><td>" + prioritarios[i].Nombres + "</td><td>" + prioritarios[i].Apellidos + "</td><td>" + prioritarios[i].Cedula + "</td><td>" + prioritarios[i].NumContacto + "</td>";
+
+                    var lista_var = prioritarios[i].ListaVariablesPrioritarias;
+                    console.log(lista_var);
+                    fila += "<td>";
+                    var aux = "";
+                    for (var j = 0 ; j < lista_var.length ; j++) {
+                        aux += lista_var[j].NombreVariable + ", ";
+                    }
+                    aux = aux.substring(0, aux.length - 2);
+                    fila += aux + "</td></tr>";
+                    $("#lista-prioritarios").append(fila);
+                    $("#" + prioritarios[i].Cedula).click(verDetalle);
+                }
+
+                $(".filaselector").mouseenter(function () {
+                    lastcolor = $(this).css("background-color");
+                    $(this).css("background-color", "#51B1D0");
+                });
+
+                $(".filaselector").mouseleave(function () {
+                    $(this).css("background-color", lastcolor);
+                });
+
+            });
+        } else {
+            $(location).attr("href", "lista-archivos.html");
+        }
+    }
+
+    function verDetalle() {        
+        localStorage.setItem('cedula', $(this).attr("id"));
+        $(location).attr("href", "detalle-prioritarios.html");
+    }
+
+</script>
+

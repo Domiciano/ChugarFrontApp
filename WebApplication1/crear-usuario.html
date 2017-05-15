@@ -1,0 +1,126 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <script src="https://www.gstatic.com/firebasejs/3.7.1/firebase.js"></script>
+    <script>
+		  // Initialize Firebase
+		  var config = {
+		    apiKey: "AIzaSyDnFJ-GDuPcCfAVv0ylTNu-mvu_1CVqw1k",
+		    authDomain: "diabetesicesi-123d7.firebaseapp.com",
+		    databaseURL: "https://diabetesicesi-123d7.firebaseio.com",
+		    storageBucket: "diabetesicesi-123d7.appspot.com",
+		    messagingSenderId: "557877522634"
+		  };
+		  firebase.initializeApp(config);
+    </script>
+
+    <meta charset="UTF-8">
+    <title>Chugar</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:300i,400,400i,500i,600i,700i,800i" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/site.css">
+    <script type="text/javascript" src="js/jquery-1.11.3.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="navigation"><a class="open-menu-btn" href="#" onclick="openSideMenu()">MENÚ</a><span>user name</span></div>
+
+    <div class="layout">
+        <div id="backdrop" class="bd-hide"></div>
+        <div id="side-menu">
+            <div class="logo">
+                <h1 class="title">chugar</h1>
+                <div class="subtitle">web</div>
+            </div>
+            <div class="user">
+                <div class="text">Bienvenido</div>
+                <div class="text uppercase">user name</div>
+            </div>
+            <div class="menu">
+                <a class="menu-link" href="carga-de-archivos.html">Importar datos</a>
+                <a class="menu-link active" href="gestion-de-usuarios.html">Gestión de usuarios</a>
+                <a class="menu-link" href="#">Gestión de roles</a>
+                <a class="menu-link" href="reporte.html">Reportes</a>
+                <a class="menu-link" href="#">Cerrar sesión</a>
+            </div>
+        </div>
+        <div class="content">
+            <div class="gray-content">
+                <div class="header">
+                    <h2>Crear nuevo usuario</h2>
+                </div>
+                <div class="body">
+                    <div class="view">
+                        <!--<h4>El nombre de usuario debe tener un mínimo de seis (6) caracteres de extensión.</h4>-->
+                        <h4>La contraseña debe tener un mínimo de tres (6) caracteres no alpha numéricos incluidos "( ) { } - _ ' % &amp;".</h4>
+                        <div class="custom-form">
+                            <div class="fila">
+                                <div class="custom-label">Nombre</div>
+                                <div class="custom-input"><input type="text" id="nombre"></div>
+                            </div>
+                            <div class="fila">
+                                <div class="custom-label">Apellido</div>
+                                <div class="custom-input"><input type="text" id="apellido"></div>
+                            </div>
+                            <div class="fila">
+                                <div class="custom-label">Celular</div>
+                                <div class="custom-input"><input type="text" id="celular"></div>
+                            </div>
+                            <div class="fila">
+                                <div class="custom-label">Correo electrónico</div>
+                                <div class="custom-input"><input type="email" id="email"></div>
+                            </div>
+                            <div class="fila">
+                                <div class="custom-label">Contraseña</div>
+                                <div class="custom-input"><input type="password" id="password"></div>
+                            </div>
+                            <div class="fila">
+                                <div class="custom-label">Confirmar contraseña</div>
+                                <div class="custom-input"><input type="password" id="conf-password"></div>
+                            </div>
+                            <!--<div class="fila not">
+                                <div class="custom-label">Aprobado</div>
+                                <div class="custom-input"><input type="checkbox" id="aprobado"></div>
+                            </div>-->
+                            <div class="fila">
+                                <div class="custom-label">Rol</div>
+                                <div class="custom-input">
+                                    <div class="custom-select">
+                                        <select id="rol">
+                                            <!--<option value="1">Admin</option>
+                                            <option value="2">User</option>
+                                            <option value="3">3</option>-->
+                                        </select>
+                                        <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="fila">
+                                <div class="custom-label">Empresa</div>
+                                <div class="custom-input">
+                                    <div class="custom-select">
+                                        <select id="company">
+                                            <!--<option value="1">SOS</option>
+                                            <option value="2">Comfenalco</option>
+                                            <option value="3">Comfandi</option>-->
+                                        </select>
+                                        <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer">
+                    <a href="gestion-de-usuarios.html" class="custom-btn btn-gray mrgn-right">Cancelar</a>
+                    <a href="#" class="custom-btn" onclick="enviarFormularioCreacion()">Crear usuario</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="js/site.js"></script>
+    <script type="text/javascript" src="js/crear-usuario.js"></script>
+</body>
+</html>

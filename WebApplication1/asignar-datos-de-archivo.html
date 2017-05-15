@@ -1,0 +1,106 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+	<head>
+
+
+		<script src="https://www.gstatic.com/firebasejs/3.7.1/firebase.js"></script>
+		<script>
+		  // Initialize Firebase
+		  var config = {
+		    apiKey: "AIzaSyDnFJ-GDuPcCfAVv0ylTNu-mvu_1CVqw1k",
+		    authDomain: "diabetesicesi-123d7.firebaseapp.com",
+		    databaseURL: "https://diabetesicesi-123d7.firebaseio.com",
+		    storageBucket: "diabetesicesi-123d7.appspot.com",
+		    messagingSenderId: "557877522634"
+		  };
+		  firebase.initializeApp(config);
+		</script>
+		<script type="text/javascript" src="js/jquery-1.11.3.js"></script>
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="js/site.js"></script>
+
+
+		<meta charset="UTF-8">
+		<title>Chugar</title>
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+		<link href="https://fonts.googleapis.com/css?family=Raleway:300i,400,400i,500i,600i,700i,800i" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="css/site.css">
+		
+	</head>
+	<body>
+
+		<div class="navigation"><a class="open-menu-btn" href="#" onclick="openSideMenu()">MENÚ</a><span>user name</span></div>
+		
+		<div class="layout" id="page_asignar_datos">
+			<div id="backdrop" class="bd-hide"></div>
+			<div id="side-menu">
+				<div class="logo">
+					<h1 class="title">chugar</h1>
+					<div class="subtitle">web</div>
+				</div>
+				<div class="user">
+					<div class="text">Bienvenido</div>
+					<div class="text uppercase" id="nombre_usuario">user name</div>
+				</div>
+				<div class="menu">
+                    <a class="menu-link" href="#">Archivos</a>
+					<a class="menu-link active" href="#">Importar datos</a>                    
+					<a class="menu-link" href="gestion-de-usuarios.html">Gestión de usuarios</a>
+					<a class="menu-link" href="#">Gestión de roles</a>
+					<a class="menu-link" href="#">Reportes</a>
+					<a class="menu-link" href="#" id="btn_cerrar_sesion">Cerrar sesión</a>
+				</div>
+			</div>
+			<div class="content">
+				<div class="gray-content">
+					<div class="header">
+						<span>Paso 2</span>
+						<h2>Asignar datos de archivo</h2>
+					</div>
+					<div class="body">
+						<div class="view">
+							<h4>Los siguientes errores han sido encontrados en el archivo</h4>
+							<div class="table-container">
+								<table class="errors-table" id="tabla-errores">
+									<tr><td>No se encontró ningún error en el archivo</td></tr>									
+								</table>
+							</div>
+							<div class="centered">
+								<p class="blue-text">Se recomienda solucionar los errores y volver a cargar el archivo</p>
+								<a href="#" class="custom-btn">Cargar archivo nuevamente</a>
+							</div>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+
+		<script type="text/javascript" src="js/site.js"></script>
+	</body>
+</html>
+
+
+
+<script type="text/javascript">
+    $(document).ready(init);
+
+    function init() {
+        var lista_errores = localStorage.getItem("lista_errores");
+        localStorage.removeItem("lista_errores");
+        console.log(localStorage.getItem("lista_errores"));
+        var json = JSON.parse(lista_errores);
+        
+        if (json !== null) {
+            $("#page_asignar_datos").css("visibility", "visible");
+            $("#tabla-errores").empty();
+            for (var i = 0 ; i < json.List.length ; i++) {
+                $("#tabla-errores").append("<tr><td>" + json.List[i].Descripcion + "</td></tr>");
+            }
+        } else {
+            $(location).attr("href", "carga-de-archivos.html");
+        }
+    }
+    
+</script>

@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <script src="https://www.gstatic.com/firebasejs/3.7.1/firebase.js"></script>
+    <script>
+		  // Initialize Firebase
+		  var config = {
+		    apiKey: "AIzaSyDnFJ-GDuPcCfAVv0ylTNu-mvu_1CVqw1k",
+		    authDomain: "diabetesicesi-123d7.firebaseapp.com",
+		    databaseURL: "https://diabetesicesi-123d7.firebaseio.com",
+		    storageBucket: "diabetesicesi-123d7.appspot.com",
+		    messagingSenderId: "557877522634"
+		  };
+		  firebase.initializeApp(config);
+    </script>
+    <script type="text/javascript" src="js/jquery-1.11.3.js"></script>
+    <script type="text/javascript" src="js/login.js"></script>
+
+    <meta charset="UTF-8">
+    <title>Chugar | Login</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:300i,400,400i,500i,600i,700i,800i" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/login.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="logo">
+            <h1 class="title">chugar</h1>
+            <div class="subtitle">web</div>
+        </div>
+
+        <input type="text" name="usuario" placeholder="Usuario" id="usuario">
+        <input type="password" name="password" placeholder="Contraseña" id="password">
+        <div class="flexed-row">
+            <a href="recuperar-password.html">Olvidó su contraseña?</a>
+            <div class="remember-me">
+                <input type="checkbox" name="recordarme" id="recordarme"><label for="recordarme">Recordarme</label>
+            </div>
+
+        </div>
+
+        <a href="#" id="iniciar">Iniciar sesión</a>
+    </div>
+</body>
+</html>
+
+

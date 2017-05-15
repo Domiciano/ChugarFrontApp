@@ -1,0 +1,55 @@
+﻿<div>
+    <div class="gray-content">
+        <div class="header">
+            <span>Paso 3</span>
+            <h2>Carga de archivos</h2>
+        </div>
+        <div class="body">
+            <div class="view centered">
+                <h3 id="mensaje">Cargando...</h3>
+                <h3 class="bold" id="datos_importados"></h3>
+                <img class="happy-face" src="images/happy-face.png">
+            </div>
+        </div>
+        <div class="footer">
+            <a href="#" id="finalizar" class="custom-btn">Finalizar</a>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(init);
+
+    function init() {
+
+        $("#finalizar").click(function (e) {
+            e.preventDefault();
+            $(".content").html(waitloadingGif);
+            $.ajax({
+                type: "GET",
+                url: "/Admin/CargarArchivos"
+            }).done(function (html) {
+                $(".content").html(html);
+            });
+        });
+        var lista_errores = localStorage.getItem("lista_errores");
+        localStorage.removeItem("lista_errores");
+        console.log(localStorage.getItem("lista_errores"));
+        var json = JSON.parse(lista_errores);
+
+        if (json !== null) {
+            $("#page_carga_satisfactoria").css("visibility", "visible");
+            var string = json.Archivo.NumFilasImportadas;
+            $("#mensaje").html("Se han importado satisfactoriamente");
+            if (parseInt(string) == 1) {
+                $("#datos_importados").html(string + " fila!");
+            }else{
+                $("#datos_importados").html(string + " filas!");
+            }
+            
+        } else {
+            $(location).attr("href", "/Admin/CargarArchivos");
+        }
+    }
+
+</script>

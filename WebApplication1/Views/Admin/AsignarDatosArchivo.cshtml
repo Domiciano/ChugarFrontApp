@@ -1,0 +1,57 @@
+﻿<div>
+    <div class="gray-content">
+        <div class="header">
+            <span>Paso 2</span>
+            <h2>Asignar datos de archivo</h2>
+        </div>
+        <div class="body">
+            <div class="view">
+                <h4>Los siguientes errores han sido encontrados en el archivo</h4>
+                <div class="table-container">
+                    <table class="errors-table" id="tabla-errores">
+                        <tr><td>No se encontró ningún error en el archivo</td></tr>
+                    </table>
+                </div>
+                <div class="centered">
+                    <p class="blue-text">Se recomienda solucionar los errores y volver a cargar el archivo</p>
+                    <a id="cargar_archivo_nuevamente" href="#" class="custom-btn">Cargar archivo nuevamente</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script type="text/javascript">
+        $(document).ready(init);
+
+        function init() {
+
+            $("#cargar_archivo_nuevamente").click(function (e) {
+                e.preventDefault();
+                $(".content").html(waitloadingGif);
+                $.ajax({
+                    type: "GET",
+                    url: "/Admin/CargarArchivos"
+                }).done(function (html) {
+                    $(".content").html(html);
+                });
+            });
+
+            var lista_errores = localStorage.getItem("lista_errores");
+            localStorage.removeItem("lista_errores");
+            console.log(localStorage.getItem("lista_errores"));
+            var json = JSON.parse(lista_errores);
+
+            if (json !== null) {
+                $("#page_asignar_datos").css("visibility", "visible");
+                $("#tabla-errores").empty();
+                for (var i = 0 ; i < json.List.length ; i++) {
+                    $("#tabla-errores").append("<tr><td>" + json.List[i].Descripcion + "</td></tr>");
+                }
+            } else {
+                $(location).attr("href", "/Admin/CargarArchivos");
+            }
+        }
+
+    </script>
+</div>

@@ -1,0 +1,147 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <script src="https://www.gstatic.com/firebasejs/3.7.1/firebase.js"></script>
+    <script>
+		  // Initialize Firebase
+		  var config = {
+		    apiKey: "AIzaSyDnFJ-GDuPcCfAVv0ylTNu-mvu_1CVqw1k",
+		    authDomain: "diabetesicesi-123d7.firebaseapp.com",
+		    databaseURL: "https://diabetesicesi-123d7.firebaseio.com",
+		    storageBucket: "diabetesicesi-123d7.appspot.com",
+		    messagingSenderId: "557877522634"
+		  };
+		  firebase.initializeApp(config);
+    </script>
+
+    <meta charset="UTF-8">
+    <title>Chugar</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:300i,400,400i,500i,600i,700i,800i" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/site.css">
+    <script type="text/javascript" src="js/jquery-1.11.3.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="navigation"><a class="open-menu-btn" href="#" onclick="openSideMenu()">MENÚ</a><span>user name</span></div>
+
+    <div class="layout">
+        <div id="backdrop" class="bd-hide"></div>
+        <div id="side-menu">
+            <div class="logo">
+                <h1 class="title">chugar</h1>
+                <div class="subtitle">web</div>
+            </div>
+            <div class="user">
+                <div class="text">Bienvenido</div>
+                <div class="text uppercase">user name</div>
+            </div>
+            <div class="menu">
+                <a class="menu-link" href="lista-archivos.html">Archivos</a>
+                <a class="menu-link" href="carga-de-archivos.html">Importar datos</a>
+                <a class="menu-link active" href="gestion-de-usuarios.html">Gestión de usuarios</a>
+                <a class="menu-link" href="#">Gestión de roles</a>
+                <a class="menu-link" href="reporte.html">Reportes</a>
+                <a class="menu-link" href="#">Cerrar sesión</a>
+            </div>
+        </div>
+        <div class="content">
+            <div class="gray-content">
+                <div class="header">
+                    <h2>Gestión de usuarios</h2>
+                </div>
+                <div class="body">
+                    <div class="view">
+                        <!--<h4>Para garantizar los roles de los usuarios, seleccione el botón de edición frente a cada usuario y seleccione la opción de "Asignar rol".</h4>-->
+                        <h4>Listado de usuarios creados en el sistema</h4>
+                        <div class="search-container">
+                            <!--<div class="custom-select" hidden>
+                                <select>
+                                    <option value="1">Ver todos</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                </select>
+                                <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true" hidden></span>
+                            </div>
+                            <input class="mrgn-right" type="text">
+                            <button href="#" class="custom-btn" hidden>Buscar</button>
+                            <a href="crear-usuario.html" class="custom-btn pull-right">Crear usuario</a>-->
+                        </div>
+                        <div class="table-container">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th class="centered">Usuario</th>
+                                        <!--<th class="centered">Aprobado</th>-->
+                                        <th class="centered">Correo</th>
+                                        <th class="centered">Teléfono</th>
+                                        <th class="centered">Organización</th>
+                                        <!--<th class="centered">Última actividad</th>-->
+                                        <th class="centered"></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tabla-usuarios">
+                                    <!--<tr>
+                                        <td class="centered">12345</td>
+                                        <td class="centered"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></td>
+                                        <td class="centered"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></td>
+                                        <td class="centered">Admin</td>
+                                        <td class="centered">admin@chugar.com</td>
+                                        <td class="centered">25/02/2017 06:46 p.m</td>
+                                        <td class="centered"><a class="mrgn-right" href="editar-usuario.html"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></a><!--<a href="#"><span class="glyphicon glyphicon-remove" aria-hidden="true"></a></td>
+                                    </tr>-->
+                                    <!--<tr>
+                                        <td class="centered">12345</td>
+                                        <td class="centered"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></td>
+                                        <td class="centered"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></td>
+                                        <td class="centered">Admin</td>
+                                        <td class="centered">admin@chugar.com</td>
+                                        <td class="centered">25/02/2017 06:46 p.m</td>
+                                        <td class="centered"><a class="mrgn-right" href="#"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></a><a href="#"><!--<span class="glyphicon glyphicon-remove" aria-hidden="true"></a></td>
+                                    </tr>-->
+                                    <!--<tr>
+                                        <td class="centered">12345</td>
+                                        <td class="centered"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></td>
+                                        <td class="centered"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></td>
+                                        <td class="centered">Admin</td>
+                                        <td class="centered">admin@chugar.com</td>
+                                        <td class="centered">25/02/2017 06:46 p.m</td>
+                                        <td class="centered"><a class="mrgn-right" href="#"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></a><a href="#"><!--<span class="glyphicon glyphicon-remove" aria-hidden="true"></a></td>
+                                    </tr>-->
+                                    <!--<tr>
+                                        <td class="centered">12345</td>
+                                        <td class="centered"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></td>
+                                        <td class="centered"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></td>
+                                        <td class="centered">Admin</td>
+                                        <td class="centered">admin@chugar.com</td>
+                                        <td class="centered">25/02/2017 06:46 p.m</td>
+                                        <td class="centered"><a class="mrgn-right" href="#"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></a><a href="#"><!--<span class="glyphicon glyphicon-remove" aria-hidden="true"></a></td>
+                                    </tr>-->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer">
+                    <a href="crear-usuario.html" class="custom-btn mrgn-right">Crear usuario</a>
+                    <!--<span class="mrgn-right">Página 1 de 10</span>
+                    <div class="custom-select">
+                        <select>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select>
+                        <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+                    </div>
+                    <a href="#" class="custom-btn mrgn-right">Página anterior</a>
+                    <a href="#" class="custom-btn">Página Siguiente</a>-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="js/site.js"></script>
+    <script type="text/javascript" src="js/gestion-de-usuarios.js"></script>
+</body>
+</html>

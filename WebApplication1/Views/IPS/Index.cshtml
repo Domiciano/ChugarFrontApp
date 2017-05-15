@@ -1,0 +1,127 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+
+
+    <script src="https://www.gstatic.com/firebasejs/3.7.1/firebase.js"></script>
+    <script>
+		  // Initialize Firebase
+		  var config = {
+		    apiKey: "AIzaSyDnFJ-GDuPcCfAVv0ylTNu-mvu_1CVqw1k",
+		    authDomain: "diabetesicesi-123d7.firebaseapp.com",
+		    databaseURL: "https://diabetesicesi-123d7.firebaseio.com",
+		    storageBucket: "diabetesicesi-123d7.appspot.com",
+		    messagingSenderId: "557877522634"
+		  };
+		  firebase.initializeApp(config);
+    </script>
+    <script type="text/javascript" src="~/js/jquery-1.11.3.js"></script>
+    <script type="text/javascript" src="~/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/js/site.js"></script>
+
+
+    <meta charset="UTF-8">
+    <title>Chugar</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:300i,400,400i,500i,600i,700i,800i" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/site.css">
+
+
+</head>
+<body>
+
+    <div class="navigation"><a class="open-menu-btn" href="#" onclick="openSideMenu()">MENÚ</a><span>user name</span></div>
+
+    <div class="layout">
+        <div id="backdrop" class="bd-hide"></div>
+        <div id="side-menu">
+            <div class="logo">
+                <h1 class="title">chugar</h1>
+                <div class="subtitle">web</div>
+            </div>
+            <div class="user">
+                <div class="text">Bienvenido</div>
+                <div class="text uppercase" id="nombre_usuario">user name</div>
+            </div>
+            <div class="menu">
+                <a id="archivos" class="menu-link" href="lista-archivos.html">Archivos</a>
+                <a id="cargararchivo" class="menu-link active" href="carga-de-archivos.html">Importar datos</a>
+                <a id="gestionusuarios" class="menu-link" href="gestion-de-usuarios.html">Gestión de usuarios</a>
+                
+                <a class="menu-link" href="#" id="cerrarsesion">Cerrar sesión</a>
+            </div>
+
+
+
+        </div>
+        <div class="content">
+            @{
+                Html.RenderAction("CargarArchivos", "Admin");
+            }
+        </div>
+    </div>
+</body>
+</html>
+
+<script type="text/javascript">
+    var waitloadingGif = '<img src="images/loader.gif" width="128" height="128" style="display:block; margin:auto;"/>';
+
+
+    $("#archivos").click(function (e) {
+        e.preventDefault();
+        $(".content").html(waitloadingGif);
+        $.ajax({
+            type: "GET",
+            url: "@Url.Action("Archivos", "Admin")"
+        }).done(function (html) {
+            $(".content").hide().html(html).fadeIn('slow');
+            $("#archivos").addClass("active");
+            $("#cargararchivo").removeClass("active");
+            $("#gestionusuarios").removeClass("active");
+            $("#gestionroles").removeClass("active");
+            $("#reportes").removeClass("active");
+        });
+    });
+
+
+    $("#cargararchivo").click(function (e) {
+        e.preventDefault();
+        $(".content").html(waitloadingGif);
+        $.ajax({
+            type: "GET",
+            url: "@Url.Action("CargarArchivos", "Admin")"
+        }).done(function (html) {
+            $(".content").hide().html(html).fadeIn('slow');
+            $("#archivos").removeClass("active");
+            $("#cargararchivo").addClass("active");
+            $("#gestionusuarios").removeClass("active");
+            $("#gestionroles").removeClass("active");
+            $("#reportes").removeClass("active");
+        });
+    });
+
+
+    $("#gestionusuarios").click(function (e) {
+        e.preventDefault();
+        $(".content").html(waitloadingGif);
+        $.ajax({
+            type: "GET",
+            url: "@Url.Action("GestionUsuarios", "Admin")"
+        }).done(function (html) {
+            $(".content").hide().html(html).fadeIn('slow');
+
+            $("#archivos").removeClass("active");
+            $("#cargararchivo").removeClass("active");
+            $("#gestionusuarios").addClass("active");
+            $("#gestionroles").removeClass("active");
+            $("#reportes").removeClass("active");
+        });
+    });
+
+</script>

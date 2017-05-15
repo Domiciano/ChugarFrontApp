@@ -1,0 +1,85 @@
+﻿<div>
+    <div class="gray-content">
+        <div class="header">
+            <span></span>
+            <h2>Detalle</h2>
+        </div>
+        <div class="body">
+            <div class="view">
+                <h4 id="descripcion">Cargando...</h4>
+                <div class="table-container">
+                    <table class="errors-table">
+                        <thead>
+                            <tr>
+                                <th>Variable</th>
+                                <th>Valor</th>
+                                <th>Umbral</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="lista-detalle"></tbody>
+                    </table>
+                </div>
+                <div class="centered">
+                    <a href="#" id="atras" class="custom-btn">Atrás</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    init();
+
+    function init() {
+        $("#atras").click(function (e) {
+            e.preventDefault();
+            $(".content").html(waitloadingGif);
+            $.ajax({
+                type: "GET",
+                url: "/Admin/ListaPrioritarios"
+            }).done(function (html) {
+                $(".content").html(html);
+            });
+        });
+        var cedula = localStorage.getItem('cedula');
+        var id_file = localStorage.getItem('file-id');
+        if (cedula !== null && id_file !== null) {
+
+            $.ajax({
+                url: "/Data/getListaDePrioritarios",
+                type: "GET",
+                data: { "file_id": id_file }
+            }).done(function (respuesta) {
+
+                //respuesta = "[{\"Apellidos\":\"Fake\",\"Cedula\":\"46546513\",\"Id\":\"e54bef9f-8135-4463-a6c2-d62aca026213\",\"IdArchivo\":\"fc98a3b3-64fc-4743-8911-18e7d23c781b\",\"ListaVariablesPrioritarias\":[{\"Id\":\"e57d0a90-5d32-430a-9751-2dbd900d73d6\",\"NombreVariable\":\"COSITOMALO\",\"ValorUmbral\":\"109\",\"ValorVariable\":\"50\"},{\"Id\":\"c8a94cd5-4ece-45ba-930a-94e535e49357\",\"NombreVariable\":\"COSITOMALO\",\"ValorUmbral\":\"109\",\"ValorVariable\":\"50\"},{\"Id\":\"c2788f82-3892-425d-b16a-164283a694e2\",\"NombreVariable\":\"COSITOMALO\",\"ValorUmbral\":\"109\",\"ValorVariable\":\"50\"}],\"Nombres\":\"Jhon\",\"NumContacto\":\"123-fake-numb\"}]";
+                var prioritarios = JSON.parse(respuesta);
+                var paciente;
+
+                for (var i = 0 ; i < prioritarios.length ; i++) {
+                    if (prioritarios[i].Cedula === cedula) {
+                        paciente = prioritarios[i];
+                    }
+                }
+
+                var texto = "Las siguientes variables corresponden a <b>" + paciente.Nombres + " " + paciente.Apellidos + "</b>";
+                $("#descripcion").html(texto);
+
+                var listaVariables = paciente.ListaVariablesPrioritarias;
+                $("#lista-detalle").empty;
+                for (var i = 0 ; i < listaVariables.length ; i++) {
+                    $("#lista-detalle").append("<tr><td>" + listaVariables[i].NombreVariable + "</td><td>" + listaVariables[i].ValorVariable + "</td><td>" + listaVariables[i].ValorUmbral + "</td></tr>");
+                }
+
+            });
+        } else {
+            if (id_file !== null){
+                $(location).attr("href","lista-prioritarios.html");
+            }else{
+                $(location).attr("href","lista-archivos.html");
+            }
+        }
+    }
+</script>
+
+
